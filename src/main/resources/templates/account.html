@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> <meta charset="utf-8"> <title>welcome</title>
+</head>
+<body>
+<h1>Name</h1>
+<h2 th:text="${account.name}"></h2>
+<h1>Current Money</h1>
+<h2 th:text="${account.score}"></h2>
+</body>
+<!--만약 properties에 값이 없다면 실행되지 않음.-->
+<h1>propertiesName</h1>
+<h2 th:text="${propertiesName}"></h2>
+<h1>propertiesAuthorName</h1>
+<h2 th:text="${author.author}"></h2>
+</html>
