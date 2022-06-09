@@ -28,4 +28,10 @@ public class AccountWebController {
         modelmap.put("author", accountAuthorProperties);
         return "account";
     }
+
+    @GetMapping("/web/author")
+    public String getAuthor(ModelMap modelmap){
+        modelmap.put("author", accountAuthorProperties);
+        return "author";
+    }
 }

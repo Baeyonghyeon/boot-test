@@ -2,26 +2,31 @@ package com.nhnacademy.edu.springboot.student;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
-import java.util.Optional;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@DataJpaTest
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class AccountRepositoryTest {
 
     @Autowired
-    AccountRepository accountRepository;
+    private TestEntityManager testEntityManager;
+
+    @Autowired
+    private AccountRepository accountRepository;
 
     @Test
-    void testAccountRepository(){
-        Account kurt = new Account(1L, "kurt", 3_0000);
-        accountRepository.save(kurt);
+    void findAll() {
+        Account account = new Account(1L, "kurt", 3_0000);
+        testEntityManager.persist(account);
 
-        Optional<Account> account = accountRepository.findById(1L);
+        List<Account> accountList = accountRepository.findAll();
 
-        assertThat(account).isPresent();
-        assertThat(account.orElse(null)).isEqualTo(kurt);
+        assertThat(accountList).contains(account);
     }
 }
